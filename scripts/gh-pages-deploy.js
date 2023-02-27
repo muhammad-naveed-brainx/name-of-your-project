@@ -5,11 +5,11 @@ const fs = require("fs");
   try {
     // checking whether there are some uncommitted changes before checkout new orphan branch
     // await execa("git", ["update-index", "--refresh"]);
-    const { stdout } = await execa("git", ["diff-index", "HEAD"]);
-    if (stdout) {
-      console.log("Please stash or commit changes first!");
-      process.exit(1);
-    }
+    // const { stdout } = await execa("git", ["diff-index", "HEAD"]);
+    // if (stdout) {
+    //   console.log("Please stash or commit changes first!");
+    //   process.exit(1);
+    // }
     await execa("git", ["checkout", "--orphan", "gh-pages"]);
     console.log("Building...");
     await execa("npm", ["run", "build"]);
