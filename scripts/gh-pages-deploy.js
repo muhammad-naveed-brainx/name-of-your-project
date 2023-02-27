@@ -4,7 +4,7 @@ const fs = require("fs");
 (async () => {
   try {
     // checking whether there are some uncommitted changes before checkout new orphan branch
-    await execa("git", ["update-index", "--refresh"]);
+    // await execa("git", ["update-index", "--refresh"]);
     const { stdout } = await execa("git", ["diff-index", "HEAD"]);
     if (stdout) {
       console.log("Please stash or commit changes first!");
