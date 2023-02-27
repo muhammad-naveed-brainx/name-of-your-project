@@ -7,18 +7,23 @@ jobs:
   gh-pages-deploy:
     name: Deploying-to-gh-pages-name-of-job
     runs-on: ubuntu-latest
+    concurrency: ci-${{github.ref}}
     steps:
+      - name: Checkout-branch
+        uses: actions/checkout@v3
+
       - name: Setup-Node-for-use-with-actions-step-name
         uses: actions/setup-node@v3
         with:
           node-version:  14.x
-      - name: Checkout-branch
-        uses: actions/checkout@v3
 
       - name: install-dependencies
-        run: npm install
-
-      - name: Run deploy script
         run: |
-          git config user.name "muhammad-naveed-brainx" && git config user.email "muhammad.naveed@brainxtech.com"
-          npm run gh-pages-deploy
+          npm install
+          npm run build
+
+      - name: Deploy-through-JamesIves
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
