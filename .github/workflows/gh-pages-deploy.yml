@@ -25,5 +25,6 @@ jobs:
       - name: Deploy-through-JamesIves
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
+          access_token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
+          folder: dist
